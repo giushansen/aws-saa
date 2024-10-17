@@ -15,7 +15,7 @@ To plan for high availability (HA) and disaster recovery (DR)
 ### Entities management
 `Users` can have many `Groups` and vice versa  
 `Policies` define `Permissions` for an action ie: _AdministatorAccess => {Effect: Allow,  Action: {ec2: Describe, cloudwatch: GetMetricsStatistics},  Resource: *}_  
-Attach policies to IAM identities (`Users`, `Groups` to which users belong, or `Roles`)  
+Attach policies to IAM identities (`Users`, `Groups` to which users belong, or `Roles`)
 
 ### Password
 Policy: _min length_ (upper case, lower, number) + allow IAM users to _change password_ + _expiration_ + prevent _password reuse_  
@@ -45,7 +45,19 @@ Choose CPU, RAM, storage space `EBS/EFS/EC2 instance store`, network card `speed
 `Compute optimized`: Batch processing, Game server, Media transcoding, High performance web server, High computing (C)  
 `Memory optimized`: High peformance database, distributed cache store, In-memory database for Business Intelligence, Application with real-time processing of big data (R, X, z)  
 `Storage optimized`: High frequency OLTP system, Database, Cache for database like Redis, Dataware housing applications, Distributed file systems (i, D, H1)  
-*https://instances.vantage.sh/*
+*https://instances.vantage.sh/*  
+
+Purchase options:
+- On-Demand Instances: short workload, predictable pricing, pay per second, high cost, no upfront payment or long-term commitment
+- Reserved: (1 & 3 years)  
+  - Reserved instances - long workloads
+  - Convertible Reserved instances - long workloads with flexible instances but less discount   
+- Savings plans: (1 & 3 years) commitment to an amount of $ usage, long workload
+- Spot instances: short workload, cheap, can lose instance (less reliable) `current spot price < max spot` price then stop or terminate with 2 mins grace period OR `spot block for 1 to 6 hrs`
+  - Spot fleets: Allow us to automatically request spot instances with `lowestPrice/diversified/capacityOptimized/priceCapacityOptimized(recommended)`     
+- Dedicated host: book an entire `physical server`, control instance placement, most expensive
+- Dedicated instance: no other customers will share your `hardware but for the same account`
+- Capacity reservations: reserve capacity in a specific AZ for any duration, no billing discount, on demand rate, suitable for short term, uninterrupted workloads in specific AZ    
 
 ### Security Group
 
@@ -59,6 +71,7 @@ Good to maintain one security group dedicated to SSH access
 `SSH`  
 `Direct Connect`: (Simple web short lived SSH connection)  
 `Session Manager`: Enable AWS CLI to establish SSH + Transfer files via SCP + use IAM policies to explicitly allow or deny users, groups, or roles to make SSH connections using Session Manager  
+Use IAM roles for EC2
 
 
 
