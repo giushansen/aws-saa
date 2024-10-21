@@ -82,13 +82,35 @@ Public IP means the machine can be identified on the internet (WVVW) • Must be
 #### Private IP
 
 - Private IP means the machine can only be identified on a private network only  
-- The IP must be unique across the private network - two different private networks (two companies) can have the same IPs - connect to WWW using an internet gateway (a proxy) - Only a specified range of IPs can be used as private IP 
+- The IP must be unique across the private network - two different private networks (two companies) can have the same IPs - connect to WWW using an internet gateway (a proxy) - Only a specified range of IPs can be used as private IP
+
+#### Elastic IP 
+
+- With an Elastic IP address, can mask the failure of an instance or software by rapidly remapping the address to another instance in your account  
+- Can only have 5 Elastic IP in an account (you can ask AWS to increase that)   
+- Overall, avoid using Elastic IP:  
+    - They often reflect poor architectural decisions
+    - Instead, use a random public IP and register a DNS name to it
+    - Or as we'll see later, use a Load Balancer and don't use a public IP 
 
 ### Placement groups
 
-- `Cluster`: clusters instances into a low-latency group in a single Availability Zone  
-- `Spread`: spreads instances across underlying hardware (max 7 instances per group per AZ) — critical applications
-- `Partition`: spreads instances across many different partitions (which rely on different sets of racks) within an AZ. Scales to 100s of EC2 instances per group (Hadoop, Cassandra, Kafka) 
+- `Cluster`: clusters instances into a low-latency group in a single Availability Zone (10Gbps fast BUT all fails if AZ fails)
+- `Spread`: spreads instances across underlying hardware (max 7 instances per group per AZ) — critical applications (spread across AZ so high availability BUT limited to 7 instances)   
+- `Partition`: spreads instances across many different partitions (which rely on racks) (7 partitions max) per AZ. Scales to 100s of EC2 instances per group (parition aware apps: Hadoop, Cassandra, Kafka)   
+
+### ENI (Elastic Network Interfaces)
+
+- Logical component in a VPC that represents a virtual network card
+- ENI can have the following attributes:
+    - Primary private IPv4, one or more secondary IPv4
+    -  One Elastic IP (IPv4) per private IPv4
+    -  One Public IPv4
+    -  One or more security groups
+    -  A MAC address
+    -  Can create ENI independently and attach them on the fly on EC2 instances for failover
+    -  Bound to a specific availability zone (AZ) 
+
 
 
 
