@@ -71,7 +71,25 @@ Good to maintain one security group dedicated to SSH access
 `SSH`  
 `Direct Connect`: (Simple web short lived SSH connection)  
 `Session Manager`: Enable AWS CLI to establish SSH + Transfer files via SCP + use IAM policies to explicitly allow or deny users, groups, or roles to make SSH connections using Session Manager  
-Use IAM roles for EC2
+Use IAM roles for EC2  
+
+### IP
+
+#### Public IP
+
+Public IP means the machine can be identified on the internet (WVVW) • Must be unique across the whole web (not two machines can have the same public IP). • Can be geo-located easily  
+
+#### Private IP
+
+- Private IP means the machine can only be identified on a private network only  
+- The IP must be unique across the private network - two different private networks (two companies) can have the same IPs - connect to WWW using an internet gateway (a proxy) - Only a specified range of IPs can be used as private IP 
+
+### Placement groups
+
+- `Cluster`: clusters instances into a low-latency group in a single Availability Zone  
+- `Spread`: spreads instances across underlying hardware (max 7 instances per group per AZ) — critical applications
+- `Partition`: spreads instances across many different partitions (which rely on different sets of racks) within an AZ. Scales to 100s of EC2 instances per group (Hadoop, Cassandra, Kafka) 
+
 
 
 
