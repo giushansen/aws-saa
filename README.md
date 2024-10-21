@@ -109,7 +109,17 @@ Public IP means the machine can be identified on the internet (WVVW) • Must be
     -  One or more security groups
     -  A MAC address
     -  Can create ENI independently and attach them on the fly on EC2 instances for failover
-    -  Bound to a specific availability zone (AZ) 
+    -  Bound to a specific availability zone (AZ)
+
+### EC2 Hibernate
+
+- The in-memory (RAM) state is preserved = The instance boot is much faster! (the OS is not stopped / restarted) - Under the hood: the RAM state is written to a file in the root EBS volume  
+- The root EBS volume must be encrypted  
+- Use cases:
+  - Long-running processing  
+  - Saving the RAM state   
+  - Services that take time to initialize  
+- Cannot be kept more than 60 days  
 
 
 
